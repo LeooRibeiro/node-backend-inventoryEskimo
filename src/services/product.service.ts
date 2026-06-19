@@ -7,6 +7,19 @@ export class ProductService {
     return this.repository.findAll()
   }
 
+//GET PRODUCT BY ID
+  async getProductById(id: number) {
+
+  const product = await this.repository.findById(id)
+
+  if (!product) {
+    throw new Error('Produto não encontrado')
+  }
+
+  return product
+}
+
+//CREATE A PRODUCT
   async createProduct(
   nome: string,
   qtd_unidade?: number,
@@ -22,5 +35,38 @@ export class ProductService {
     qtd_unidade,
     qtd_engradado
   })
+}
+
+//UPDATE A PRODUCT
+async updateProduct(
+  id: number,
+  nome: string,
+  qtd_unidade?: number,
+  qtd_engradado?: number
+) {
+
+  const product = await this.repository.findById(id)
+
+  if (!product) {
+    throw new Error('Produto não encontrado')
+  }
+
+  return this.repository.update(id, {
+    nome,
+    qtd_unidade,
+    qtd_engradado
+  })
+}
+
+//DELETE PRODUCT
+async deleteProduct(id: number) {
+
+  const product = await this.repository.findById(id)
+
+  if (!product) {
+    throw new Error('Produto não encontrado')
+  }
+
+  await this.repository.delete(id)
 }
 }

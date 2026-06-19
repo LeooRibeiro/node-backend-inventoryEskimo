@@ -15,3 +15,5 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000')
 })
+
+// resetar banco para a contagem 0 do ID : TRUNCATE TABLE estoque_db RESTART IDENTITY;
